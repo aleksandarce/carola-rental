@@ -1,0 +1,360 @@
+/*
+ * Small additions on top of the supplied Carola template CSS.
+ * Only covers markup we simplified/invented while trimming the template
+ * down to what the 3 pages actually need. Load this after style.css /
+ * responsive.css so it can override where needed.
+ */
+
+/* Homepage hero (replaces the original owl-carousel slider) */
+.hero-section {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+}
+
+/* Dark scrim so the white heading/paragraph stay readable no matter
+   how bright the background photo is. */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+.hero-section .hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section .hero-content h6,
+.hero-section .hero-content h1,
+.hero-section .hero-content p {
+    color: #fff;
+}
+
+.hero-section .hero-content p {
+    margin: 20px 0 24px;
+}
+
+.sidebar-search-box input {
+     padding-left: 16px;
+}
+
+/* Banner used by the car-listing ("Our Fleet") and bookings ("My Bookings")
+   pages: same dark scrim as the homepage hero so the template's white
+   heading stays readable regardless of the photo. */
+.breadcrumb-section {
+    position: relative;
+}
+
+.breadcrumb-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+.breadcrumb-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Gap between wrapped rows of car cards (featured cars on the homepage,
+   grid on the listing page). Bootstrap's row gutter-y is 0 by default and
+   the card's own margin-bottom doesn't produce a gap once the cards are
+   stretched, equal-height flex items. */
+.featured-car-section .row,
+.car-listing-section .row {
+    row-gap: 30px;
+}
+
+/* Uniform featured car cards: equal height regardless of description
+   length, fixed-height cropped images regardless of upload aspect ratio. */
+.single-featured-car-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.single-featured-car-image img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.single-featured-car-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.single-featured-car-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.single-featured-car-book-btn {
+    margin-top: auto;
+}
+
+/* Simple homepage call-to-action strip */
+.cta-section {
+    text-align: center;
+}
+
+.cta-section h3 {
+    margin-bottom: 20px;
+}
+
+/* Empty-state message (car listing with no results) */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* Car listing sidebar: breathing room between each filter group
+   (search / type-transmission-fuel / price / seats). */
+.filter-group {
+    margin-bottom: 28px;
+}
+
+.filter-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.filter-group-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(17, 17, 17);
+    margin-bottom: 12px;
+}
+
+/* Car listing sidebar price filter: jQuery UI slider (already shipped with
+   the template) driving the two plain number inputs below it. */
+.price-range-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.price-range-inputs input {
+    width: 100%;
+}
+
+#price-slider.ui-slider {
+    height: 6px;
+    margin: 10px 8px 0;
+    background: rgb(244, 244, 244);
+    border: none;
+    border-radius: 10px;
+}
+
+#price-slider .ui-slider-range {
+    background: var(--theme-color);
+    border-radius: 10px;
+}
+
+#price-slider .ui-slider-handle {
+    top: -6px;
+    width: 18px;
+    height: 18px;
+    background: rgb(255, 255, 255);
+    border: 3px solid var(--theme-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#price-slider .ui-slider-handle:focus {
+    outline: none;
+}
+
+.pagination-wrapper {
+    margin-top: 40px;
+}
+
+/* Car details booking sidebar: pickup/return location selects, styled
+   like the sidebar's existing date inputs (.select-date-box input). */
+.select-date-box select {
+    position: relative;
+    border-radius: 10px;
+    padding: 10px 30px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: var(--secondary-font);
+    background-color: #F4F4F4;
+    cursor: pointer;
+}
+
+.price-per-day {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Insurance package picker on the booking form: radio "plan cards",
+   styled to match the sidebar's existing date-picker fields. */
+.insurance-plan-group > label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--secondary-font);
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.insurance-plan-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.insurance-plan-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background-color: #F4F4F4;
+    border: 2px solid #F4F4F4;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.insurance-plan-option:has(input:checked) {
+    border-color: var(--theme-color);
+    background-color: rgb(255, 240, 241);
+}
+
+.insurance-plan-option input[type="radio"] {
+    margin-top: 4px;
+    accent-color: var(--theme-color);
+    cursor: pointer;
+}
+
+.insurance-plan-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.insurance-plan-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: var(--secondary-font);
+}
+
+.insurance-plan-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.insurance-plan-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--theme-color);
+    white-space: nowrap;
+}
+
+.insurance-plan-coverage {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+    color: var(--body-color);
+    font-family: var(--secondary-font);
+}
+
+.booking-note {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.error-text {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #d9534f;
+}
+
+.alert-success {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background: #eaf6ec;
+    color: #2f7a3d;
+    font-size: 0.9rem;
+}
+
+.alert-error {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background: #fdecea;
+    color: #b3261e;
+    font-size: 0.9rem;
+}
+
+/* My Bookings page */
+.booking-card {
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.booking-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.booking-insurance-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-right: 6px;
+}
+
+.booking-insurance-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.booking-insurance-form select {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgb(229, 229, 229);
+    background-color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-family: var(--secondary-font);
+    color: var(--primary-color);
+}
+
+.booking-status-pending { background: #fff4e5; color: #b26a00; }
+.booking-status-confirmed { background: #eaf6ec; color: #2f7a3d; }
+.booking-status-rejected { background: #fdecea; color: #b3261e; }
+.booking-status-cancelled { background: #f1f1f1; color: #6a6a6a; }
+.booking-status-completed { background: #e8f0fe; color: #1a56db; }
+
+.full-width {
+    width: 100%;
+    text-align: center;
+}
+
+/* Spacing utilities used on the trimmed pages, in case the template
+   doesn't already define this exact increment. */
+.mt_20 { margin-top: 20px; }
+.mt_40 { margin-top: 40px; }
+.mb_20 { margin-bottom: 20px; }
+.mb_40 { margin-bottom: 40px; }
