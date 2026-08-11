@@ -12,17 +12,14 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
+     *
+     * The admin account itself is guaranteed by the
+     * seed_admin_user_into_users_table migration, not here — it needs to
+     * exist after `migrate --force` alone, without depending on this
+     * optional demo-content seeder ever being run.
      */
     public function run(): void
     {
-        // Development-only credentials — see README.
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => 'password123',
-            'is_admin' => true,
-        ]);
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

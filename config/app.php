@@ -123,4 +123,19 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Seeded Admin Password
+    |--------------------------------------------------------------------------
+    |
+    | Used only by the seed_admin_user_into_users_table migration, which
+    | guarantees an admin@example.com account exists after `migrate --force`
+    | alone (no separate db:seed step needed just to log in). Defaults to
+    | the project's documented dev password — set ADMIN_PASSWORD in your
+    | real deployment's environment variables to use a real one instead.
+    |
+    */
+
+    'admin_password' => env('ADMIN_PASSWORD', 'password123'),
+
 ];

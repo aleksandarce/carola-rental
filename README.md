@@ -14,22 +14,36 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
+## Admin account
+
+`migrate` alone (no `--seed` needed) creates an admin account —
+`admin@example.com`, password from the `ADMIN_PASSWORD` env var (defaults to
+`password123`). This runs as a migration, not a seeder, specifically so it
+exists on any host that runs migrations automatically but not seeders (e.g.
+Laravel Cloud) — **set `ADMIN_PASSWORD` to a real value in your deployment's
+environment variables before going live**, since the default is a published
+dev password.
+
 ## Development seed data
 
-`php artisan db:seed` (or `migrate --seed`) creates:
+`php artisan db:seed` (or `migrate --seed`) additionally creates optional
+demo content — safe to skip entirely on a real deployment:
 
 - 12 cars — 7 modeled on the supplied template (Toyota Land Cruiser, Nissan
   GTR Turbo, Mitsubishi Portan, Jeep Wagner, BMW 740L Series, BMW M5
   Competition, Tesla Model 3 Roadstar) plus 5 randomly generated.
 - 8 sample bookings, covering every `BookingStatus` at least once.
-- 7 users: 1 admin, 1 named test user, 5 generated customers.
+- 6 users: 1 named test user, 5 generated customers.
 
 > **Development credentials only — never use these in a deployed environment.**
 
 | Role  | Email             | Password    |
 |-------|-------------------|-------------|
-| Admin | admin@example.com | password123 |
 | User  | test@example.com  | password    |
+
+On a platform that only runs migrations automatically (not seeders), trigger
+this once manually after your first deploy — e.g. via Laravel Cloud's
+command runner: `php artisan db:seed --force`.
 
 ## Testing & code style
 
